@@ -31,9 +31,9 @@ class ReadingArea(models.Model):
     WaterClaim = models.IntegerField()
     GasClaim = models.IntegerField()
     DeleteFlg = models.CharField(max_length=1)
-    InsUserID =  models.CharField(max_length=20)
-    UpdUserID = models.CharField(max_length=20)
-    UpdDate = models.DateTimeField()
+    InsUserID =  models.CharField(max_length=20, null=True , default=None)
+    UpdUserID = models.CharField(max_length=20, null=True , default=None)
+    UpdDate = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.ReadingAreaNM

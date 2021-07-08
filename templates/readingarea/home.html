@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+
+Homepage
+
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center;"> READING AREA TABLE</h1> <a href=""><button>create</button></a>
+<br><br>
+
+    <table class="table" style="border: 2px solid black;">
+        <th>ReadingAreaNo</th>
+        <th>ReadingAreaNM</th>
+        <th>ElectricClaim</th>
+        <th>WaterClaim</th>
+        <th>GasClaim</th>    
+        <th>DeleteFlg</th>
+        {%for ra in readingarea %}
+        <tr>
+            <td>
+                {{ra.ReadingAreaNo}}
+            </td>
+            <td>
+                {{ra.ReadingAreaNM}}
+            </td>
+            <td>
+                {{ra.ElectricClaim}}
+            </td>
+            <td>
+                {{ra.WaterClaim}}
+            </td>
+            <td>
+                {{ra.GasClaim}}
+            </td>
+            <td>
+                {{ra.DeleteFlg}}
+            </td>
+            <td>
+                <a href=" {% url 'readingarea:updateReadingForm' ra.ReadingAreaNo %} " class="btn btn-warning"> edit </a>
+            </td>
+            <td>
+                <a href=" {% url 'readingarea:deleteReadingForm' ra.ReadingAreaNo %} " class="btn btn-danger"> delete </a>
+            </td>
+            
+        </tr>
+        {%endfor%}
+    </table>
+
+
+    <form action="" method="POST">
+        {%csrf_token%}
+        {{form}}
+        <input type="submit" value="submit" name = "submit">
+    </form>
+
+
+{% endblock %}

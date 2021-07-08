@@ -1,0 +1,15 @@
+{% extends 'Base.html' %}
+{% load static %}
+{%block body%}
+
+<form action="{% url 'deleteReadingForm' ra.ReadingAreaNo %} " method="POST">
+    {%csrf_token%}
+    <p>Are you sure you want to delete {{ ra.ReadingAreaNM }} ??</p>
+    <br>
+    <button><a href=" {% url 'readingarea:home'%} "> CANCEL </a></button>
+    <input type="submit" value="YES">
+
+</form>
+
+
+{% endblock %}
