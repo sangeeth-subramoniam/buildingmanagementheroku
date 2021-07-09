@@ -37,4 +37,18 @@ class ReadingArea(models.Model):
     def __str__(self):
         return self.ReadingAreaNM
 
-    
+class StoreMaster(models.Model):
+    StoreNO = models.IntegerField()
+    ReadingAreaNo = models.ForeignKey(ReadingArea, on_delete=models.CASCADE)
+    StoreType = models.IntegerField()
+    StoreNM = models.CharField(max_length=40)
+    ElectricBillingYMD = models.DateField(blank=True)
+    GasBillingYMD = models.DateField(blank=True)
+    WaterBillingYMD =  models.DateField(blank=True)
+    DeleteFlg =models.CharField(max_length=1 , blank = True)
+    InsUserID =  models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdDate = models.DateTimeField(auto_now=True,  blank = True)
+
+    def __str__(self):
+        return str(self.StoreNM)

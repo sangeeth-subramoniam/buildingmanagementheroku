@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+
+Homepage-StoreMaster
+
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center;"> Store Master TABLE</h1>
+<br>
+
+    <table class="table" style="border: 2px solid black;">
+        <th>StoreNo</th>
+        <th>ReadingAreaNo</th>
+        <th>StoreType</th>
+        <th>StoreNM</th>
+        <th>ElectricBillingDate</th>
+        <th>GasBillingDate</th>
+        <th>WaterBillingDate</th>    
+        <th>DeleteFlg</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        {%for sm in storemaster %}
+        <tr>
+            <td>
+                {{sm.StoreNO}}
+            </td>
+            <td>
+                {{sm.ReadingAreaNo}}
+            </td>
+            <td>
+                {{sm.StoreType}}
+            </td>
+            <td>
+                {{sm.StoreNM}}
+            </td>
+            <td>
+                {{sm.ElectricBillingYMD}}
+            </td>
+            <td>
+                {{sm.GasBillingYMD}}
+            </td>
+            <td>
+                {{sm.GasBillingYMD}}
+            </td>
+            <td>
+                {{sm.DeleteFlg}}
+            </td>
+            <td>
+                <a href="{% url 'storemaster:updateStoreForm' sm.id%}" class="btn btn-warning"> edit </a>
+            </td>
+            <td>
+                <a href="{% url 'storemaster:deleteStoreForm' sm.id%}" class="btn btn-danger"> delete </a>
+            </td>
+            
+        </tr>
+        {%endfor%}
+    </table>
+
+
+    <form action="" method="POST">
+        {%csrf_token%}        
+        {{form | crispy}}
+        
+        <input type="submit" value="submit" name = "submit">
+    </form>
+
+
+{% endblock %}

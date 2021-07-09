@@ -1,0 +1,15 @@
+{% extends 'Base.html' %}
+{% load static %}
+{%block body%}
+
+<form action="{% url 'storemaster:deleteStoreForm' sm.id %}" method="POST">
+    {%csrf_token%}
+    <p>Are you sure you want to delete {{ sm.StoreNM }} ??</p>
+    <br>
+    <button><a href=" {% url 'storemaster:home'%} "> CANCEL </a></button>
+    <input type="submit" value="YES">
+
+</form>
+
+
+{% endblock %}
