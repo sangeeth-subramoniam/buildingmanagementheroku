@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 
@@ -9,8 +10,8 @@ Homepage
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;"> READING AREA TABLE</h1> <a href=""><button>create</button></a>
-<br><br>
+<h1 style="text-align: center;"> READING AREA TABLE</h1>
+<br>
 
     <table class="table" style="border: 2px solid black;">
         <th>ReadingAreaNo</th>
@@ -52,8 +53,9 @@ Homepage
 
 
     <form action="" method="POST">
-        {%csrf_token%}
-        {{form}}
+        {%csrf_token%}        
+        {{form | crispy}}
+        
         <input type="submit" value="submit" name = "submit">
     </form>
 

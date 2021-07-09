@@ -2,7 +2,7 @@
 {% load static %}
 {%block body%}
 
-<form action="{% url 'deleteReadingForm' ra.ReadingAreaNo %} " method="POST">
+<form action="{% url 'readingarea:deleteReadingForm' ra.ReadingAreaNo %}" method="POST">
     {%csrf_token%}
     <p>Are you sure you want to delete {{ ra.ReadingAreaNM }} ??</p>
     <br>

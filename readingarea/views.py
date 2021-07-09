@@ -28,10 +28,15 @@ def updateReadingForm(request , pk):
     form = ReadingAreaForm( instance=readingarea)
 
     if(request.method == 'POST'):
-        form = ReadingAreaForm(request.POST , instance=readingarea)
-        if form.is_valid():
-            form.save()
+        #print('Contents' , request.POST)
+        if 'submit' in request.POST:
+            form = ReadingAreaForm(request.POST , instance=readingarea)
+            if form.is_valid():
+                form.save()
+                return redirect('/readingarea')
+        else:
             return redirect('/readingarea')
+
 
 
     context = {
@@ -45,7 +50,7 @@ def deleteReadingForm(request, pk):
     readingarea = ReadingArea.objects.get(ReadingAreaNo = pk)
 
     if(request.method == 'POST'):
-        readingarea.delete(readingarea)
+        readingarea.delete()
         return redirect('/readingarea')
 
 
