@@ -55,3 +55,40 @@ class StoreMaster(models.Model):
 
     def __str__(self):
         return str(self.StoreNM)
+
+
+class SetPositionMaster(models.Model):
+    ReadingAreaNo = models.ForeignKey(ReadingArea, on_delete=models.CASCADE)
+    SetPositionCD = models.IntegerField()
+    SetPositionNM = models.CharField(max_length=20)
+    DeleteFlg =models.CharField(max_length=1 , blank = True)
+    InsUserID =  models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdDate = models.DateTimeField(auto_now=True,  blank = True)
+
+    class Meta:
+        unique_together = ['SetPositionCD','ReadingAreaNo']
+
+    def __str__(self):
+        return str(self.SetPositionNM)
+
+
+class MeterMaster(models.Model):
+    MeterID = models.IntegerField(unique=True)
+    MeterNo = models.IntegerField()
+    MeterKBN = models.IntegerField()
+    ReadingAreaNo = models.ForeignKey(ReadingArea, on_delete=models.CASCADE)
+    UseType = models.IntegerField()
+    StoreNO = models.ForeignKey(StoreMaster, on_delete=models.CASCADE)
+    Magnification =  models.IntegerField()
+    CommonType = models.IntegerField()
+    ReadingStart =  models.IntegerField()
+    SetPositionCD = models.ForeignKey(SetPositionMaster, on_delete=models.CASCADE)
+    Remarks = models.CharField(max_length=200 , blank = True)
+    DeleteFlg =models.CharField(max_length=1 , blank = True)
+    InsUserID =  models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdDate = models.DateTimeField(auto_now=True,  blank = True)
+
+    def __str__(self):
+        return str(self.MeterNo)

@@ -25,4 +25,5 @@ urlpatterns = [
     path('readingarea', include('readingarea.urls')),
     path('codemaster', include('codemaster.urls')),
     path('storemaster', include('storemaster.urls')),
+    path('setpositionmaster', include('setpositionmaster.urls')),
 ]

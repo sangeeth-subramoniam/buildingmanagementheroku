@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'readingarea',
     'codemaster',
     'storemaster',
+    'setpositionmaster',
     
 ]
 

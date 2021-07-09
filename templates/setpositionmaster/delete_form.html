@@ -1,0 +1,15 @@
+{% extends 'Base.html' %}
+{% load static %}
+{%block body%}
+
+<form action="{% url 'setpositionmaster:deleteSetPositionForm' spm.id %}" method="POST">
+    {%csrf_token%}
+    <p>Are you sure you want to delete {{ spm.SetPositionNM }} ??</p>
+    <br>
+    <button><a href=" {% url 'setpositionmaster:home'%} "> CANCEL </a></button>
+    <input type="submit" value="YES">
+
+</form>
+
+
+{% endblock %}
