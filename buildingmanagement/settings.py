@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'codemaster',
     'storemaster',
     'setpositionmaster',
+    'metermaster',
     
 ]
 

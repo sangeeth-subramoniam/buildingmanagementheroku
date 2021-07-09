@@ -1,0 +1,15 @@
+{% extends 'Base.html' %}
+{% load static %}
+{%block body%}
+
+<form action="{% url 'metermaster:deleteMeterForm' mm.id %}" method="POST">
+    {%csrf_token%}
+    <p>Are you sure you want to delete {{ mm.MeterNo }} ??</p>
+    <br>
+    <button><a href=" {% url 'metermaster:home'%} "> CANCEL </a></button>
+    <input type="submit" value="YES">
+
+</form>
+
+
+{% endblock %}
