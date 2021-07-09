@@ -50,5 +50,8 @@ class StoreMaster(models.Model):
     UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
     UpdDate = models.DateTimeField(auto_now=True,  blank = True)
 
+    class Meta:
+        unique_together = ['StoreNO','ReadingAreaNo']
+
     def __str__(self):
         return str(self.StoreNM)

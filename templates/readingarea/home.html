@@ -12,6 +12,22 @@ Homepage-Readingarea
 {% block body %}
 <h1 style="text-align: center;"> READING AREA TABLE</h1>
 <br>
+<button onclick="create_element(2)">INSERT</button>
+<button onclick="create_element(1)">HIDE</button>
+<br>
+<br>
+<div id = "form1" class="jumbotron insert-jumbo">
+    
+    <form id = "form2" action="" method="POST">
+        {%csrf_token%}       
+        <br>
+        {{form | crispy}}
+        
+        <input type="submit" value="submit" name = "submit">
+    </form>
+    
+</div>
+<br>
 
     <table class="table" style="border: 2px solid black;">
         <th>ReadingAreaNo</th>
@@ -53,13 +69,20 @@ Homepage-Readingarea
         {%endfor%}
     </table>
 
-
-    <form action="" method="POST">
-        {%csrf_token%}        
-        {{form | crispy}}
-        
-        <input type="submit" value="submit" name = "submit">
-    </form>
+<script>
+    window.onload = function() {
+        create_element(1);
+    };
+    
+    function create_element(a)
+    {
+        if(a==1)
+            document.getElementById("form1").style.display="none";
+        else
+            document.getElementById("form1").style.display="block";
+    }
+</script>
+    
 
 
 {% endblock %}
