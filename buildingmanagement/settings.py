@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'registration',
     'homepage',
     'structure',
+    'readingarea',
+    'codemaster',
     
 ]
 

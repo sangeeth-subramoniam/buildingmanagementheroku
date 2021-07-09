@@ -8,7 +8,7 @@
         {{ form|crispy }}
         <div class="row">
             <div class="col-md-2">
-                <a href="{% url 'readingarea:home' %}"><button value = 'cancel' class="btn btn-primary" style="width: 150px;">Cancel changes</button></a>
+                <a href="{% url 'codemaster:home' %}"><button value = 'cancel' class="btn btn-primary" style="width: 150px;">Cancel changes</button></a>
             </div>
             <div class="col-md-2">
                 <input type="submit" class = "btn btn-success" style="width: 150px;" value="Save Changes" name = "submit">
@@ -17,5 +17,7 @@
         
         
     </form>
+
+
 {%endblock%}
 

@@ -5,48 +5,48 @@
 
 {% block title %}
 
-Homepage-Readingarea
+Homepage-Codemaster
 
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;"> READING AREA TABLE</h1>
+<h1 style="text-align: center;"> Code Master TABLE</h1>
 <br>
 
     <table class="table" style="border: 2px solid black;">
-        <th>ReadingAreaNo</th>
-        <th>ReadingAreaNM</th>
-        <th>ElectricClaim</th>
-        <th>WaterClaim</th>
-        <th>GasClaim</th>    
+        <th>CodeDivision</th>
+        <th>CodeDivisionNM</th>
+        <th>Code</th>
+        <th>CodeNM</th>
+        <th>Remarks</th>    
         <th>DeleteFlg</th>
         <th>Edit</th>
         <th>Delete</th>
-        {%for ra in readingarea %}
+        {%for cm in codemaster %}
         <tr>
             <td>
-                {{ra.ReadingAreaNo}}
+                {{cm.CodeType}}
             </td>
             <td>
-                {{ra.ReadingAreaNM}}
+                {{cm.CodeTypeNM}}
             </td>
             <td>
-                {{ra.ElectricClaim}}
+                {{cm.Code}}
             </td>
             <td>
-                {{ra.WaterClaim}}
+                {{cm.CodeNM}}
             </td>
             <td>
-                {{ra.GasClaim}}
+                {{cm.Remarks}}
             </td>
             <td>
-                {{ra.DeleteFlg}}
+                {{cm.DeleteFlg}}
             </td>
             <td>
-                <a href=" {% url 'readingarea:updateReadingForm' ra.ReadingAreaNo %} " class="btn btn-warning"> edit </a>
+                <a href="{%url 'codemaster:updateCodeForm' cm.id %}" class="btn btn-warning"> edit </a>
             </td>
             <td>
-                <a href=" {% url 'readingarea:deleteReadingForm' ra.ReadingAreaNo %} " class="btn btn-danger"> delete </a>
+                <a href="{%url 'codemaster:deleteCodeForm' cm.id %}" class="btn btn-danger"> delete </a>
             </td>
             
         </tr>

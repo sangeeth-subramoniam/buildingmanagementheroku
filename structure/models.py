@@ -8,11 +8,10 @@ class CodeMaster(models.Model):
     CodeTypeNM = models.CharField(max_length=10)
     Code = models.CharField(max_length= 4)
     CodeNM = models.CharField(max_length= 20)
-    Remarks = models.CharField(max_length=30)
-    DeleteFlg = models.CharField(max_length=1)
-    InsDate = models.DateTimeField(auto_created=True)
-    InsUserID = models.CharField(max_length = 20)
-    UpdUserID = models.CharField(max_length=20)
+    Remarks = models.CharField(max_length=30 , blank = True)
+    DeleteFlg = models.CharField(max_length=1 , blank = True)
+    InsUserID = models.CharField(max_length = 20 , null=True , default=None , blank = True)
+    UpdUserID = models.CharField(max_length=20 , null=True , default=None , blank = True)
     UpdDate = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -30,10 +29,10 @@ class ReadingArea(models.Model):
     ElectricClaim = models.IntegerField()
     WaterClaim = models.IntegerField()
     GasClaim = models.IntegerField()
-    DeleteFlg = models.CharField(max_length=1)
-    InsUserID =  models.CharField(max_length=20, null=True , default=None)
-    UpdUserID = models.CharField(max_length=20, null=True , default=None)
-    UpdDate = models.DateTimeField(auto_now=True)
+    DeleteFlg = models.CharField(max_length=1 , blank = True)
+    InsUserID =  models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdDate = models.DateTimeField(auto_now=True,  blank = True)
 
     def __str__(self):
         return self.ReadingAreaNM

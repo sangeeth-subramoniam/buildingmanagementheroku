@@ -23,4 +23,5 @@ urlpatterns = [
     path('register/', include('registration.urls') ),
     path('menu', include('menu.urls') ),
     path('readingarea', include('readingarea.urls')),
+    path('codemaster', include('codemaster.urls')),
 ]
