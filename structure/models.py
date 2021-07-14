@@ -24,7 +24,7 @@ class CodeMaster(models.Model):
 
 
 class ReadingArea(models.Model):
-    ReadingAreaNo = models.IntegerField(primary_key=True)
+    ReadingAreaNo = models.IntegerField()
     ReadingAreaNM = models.CharField(max_length=20)
     ElectricClaim = models.IntegerField()
     WaterClaim = models.IntegerField()
@@ -79,7 +79,7 @@ class MeterMaster(models.Model):
     MeterKBN = models.IntegerField()
     ReadingAreaNo = models.ForeignKey(ReadingArea, on_delete=models.CASCADE)
     UseType = models.IntegerField()
-    StoreNO = models.ForeignKey(StoreMaster, on_delete=models.CASCADE)
+    StoreNO = models.ForeignKey(StoreMaster,on_delete=models.CASCADE)
     Magnification =  models.IntegerField()
     CommonType = models.IntegerField()
     ReadingStart =  models.IntegerField()

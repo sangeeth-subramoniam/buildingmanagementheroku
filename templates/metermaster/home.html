@@ -18,7 +18,7 @@ Homepage-Metermaster
 <br>
 <div id = "form1" class="jumbotron insert-jumbo">
     
-    <form id = "form2" action="" method="POST">
+    <form method="post" id="personForm" data-cities-url="{% url 'metermaster:ajax_load_stores' %}" novalidate>
         {%csrf_token%}       
         <br>
         {{form | crispy}}
@@ -105,5 +105,26 @@ Homepage-Metermaster
             document.getElementById("form1").style.display="block";
     }
 </script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_ReadingAreaNo").change(function () {
+    window.alert("sometext");
+    var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+    var ReadingAreaNo = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            data: {
+                'ReadingArea': ReadingAreaNo       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_StoreNO").html(data);  // replace the contents of the city input with the data that came from the server
+            }
+        });
+    });
+</script>
+
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from structure.models import MeterMaster
+from structure.models import MeterMaster, ReadingArea, StoreMaster
 from .forms import MeterMasterForm
 
 # Create your views here.
@@ -54,3 +54,12 @@ def deletemeterForm(request, pk):
     }
 
     return render(request, 'metermaster/delete_form.html' , context)
+
+
+def load_store(request):
+    ReadingAreaNo_id = request.GET.get('ReadingArea')
+    print('value is ', ReadingAreaNo_id)
+    stores = StoreMaster.objects.filter(ReadingAreaNo_id=ReadingAreaNo_id).order_by('StoreNO')
+    print('stores are ', stores)
+    return render(request, 'metermaster/store_dropdown_list_options.html', {'stores': stores})
+
