@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from structure.models import CodeMaster
 from .forms import CodeMasterForm
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 def home(request):
@@ -14,10 +16,17 @@ def home(request):
         
 
     codemaster = CodeMaster.objects.all().order_by('Code')
+    per_page = 5
+    code_paginator = Paginator(codemaster , per_page)
+    page_num = request.GET.get('page')
+    code_page = code_paginator.get_page(page_num)
+
     
     context = {
-        'codemaster' : codemaster,
-        'form' : form
+        'codemaster' : code_page,
+        'form' : form,
+        'pgcount' : code_paginator.num_pages,
+        'per_page' : per_page
     }
     return render(request, 'codemaster/home.html' , context)
 

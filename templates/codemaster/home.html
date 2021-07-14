@@ -28,6 +28,26 @@ Homepage-Codemaster
     
 </div>
 <br>
+<div class="pagenumber">
+    <div class="row">
+        <div class="col-md-4"  style="text-align: right;">
+            {% if codemaster.has_previous %}
+                <a href="{% url 'codemaster:home' %}?page={{codemaster.previous_page_number }}"> <b style="text-align: right;"><</b> </a>
+            {%endif%}
+        </div>
+
+        <div class="col-md-4">
+            <p style="text-align: center;">Showing Page : {{codemaster.number}} / {{pgcount}} ({{per_page}} results)</p>
+        </div>
+
+        <div class="col-md-4"  style="text-align: left;">
+            {% if codemaster.has_next %}
+                <a href="{% url 'codemaster:home' %}?page={{codemaster.next_page_number}}"> <b>></b> </a>
+            {%endif%}
+        </div>
+
+    </div>
+</div>
     <table class="table" style="border: 2px solid black;">
         <th>CodeDivision</th>
         <th>CodeDivisionNM</th>
@@ -37,7 +57,7 @@ Homepage-Codemaster
         <th>DeleteFlg</th>
         <th>Edit</th>
         <th>Delete</th>
-        {%for cm in codemaster %}
+        {%for cm in codemaster.object_list %}
         <tr>
             <td>
                 {{cm.CodeType}}
