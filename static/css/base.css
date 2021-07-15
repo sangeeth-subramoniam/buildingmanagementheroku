@@ -5,3 +5,8 @@ th{
 td{
     text-align: center;
 }
+
+#id_CodeType{
+    width: 300px;
+    height: 25px;
+}

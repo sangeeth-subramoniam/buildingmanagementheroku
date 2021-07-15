@@ -1,12 +1,15 @@
 from django.shortcuts import redirect, render
 from structure.models import CodeMaster
-from .forms import CodeMasterForm
+from .forms import CodeMasterForm,CodeSearchForm
 from django.core.paginator import Paginator
 
 
 # Create your views here.
 def home(request):
     form = CodeMasterForm()
+    searchform = CodeSearchForm()
+    
+    
     if(request.method == 'POST'):
         form = CodeMasterForm(request.POST)
         if form.is_valid():
@@ -14,19 +17,29 @@ def home(request):
             return redirect('/codemaster')
 
         
-
+    codetype = request.GET.get('CodeType')    
     codemaster = CodeMaster.objects.all().order_by('Code')
+
+    if(codetype != '' and codetype is not None):
+        codemaster = codemaster.filter(id = codetype)
+        
+
     per_page = 5
     code_paginator = Paginator(codemaster , per_page)
+
+    
     page_num = request.GET.get('page')
     code_page = code_paginator.get_page(page_num)
+
+    
 
     
     context = {
         'codemaster' : code_page,
         'form' : form,
         'pgcount' : code_paginator.num_pages,
-        'per_page' : per_page
+        'per_page' : per_page,
+        'searchform' : searchform,
     }
     return render(request, 'codemaster/home.html' , context)
 

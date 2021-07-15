@@ -12,9 +12,19 @@ Homepage-Codemaster
 {% block body %}
 <h1 style="text-align: center;"> Code Master TABLE</h1>
 <br>
+<br>
+<div class="jumbotron">
+    <form class="searchform" action="" method="GET">
+        {%csrf_token%}
+        <br>
+        {{searchform | crispy}}
+        <input type="submit" value="Search" name = "submit">
+    </form>
+</div>
+<br>
+<br>
 <button onclick="create_element(2)">INSERT</button>
 <button onclick="create_element(1)">HIDE</button>
-<br>
 <br>
 <div id = "form1" class="jumbotron insert-jumbo">
     
