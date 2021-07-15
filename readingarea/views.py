@@ -1,11 +1,13 @@
 import readingarea
 from django.shortcuts import render,redirect
 from structure.models import *
-from .forms import ReadingAreaForm
+from .forms import ReadingAreaForm,AreaSearchForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
     form = ReadingAreaForm()
+    searchform = AreaSearchForm()
     if(request.method == 'POST'):
         form = ReadingAreaForm(request.POST)
         if form.is_valid():
@@ -13,12 +15,23 @@ def home(request):
             return redirect('/readingarea')
 
     
-    
+    delflg = request.GET.get('DeleteFlg') 
     readingarea = ReadingArea.objects.all().order_by('ReadingAreaNo','ReadingAreaNM')
 
+    if(delflg != '' and delflg is not None):
+        readingarea = readingarea.filter(DeleteFlg = delflg)
+
+    per_page = 20
+    area_paginator = Paginator(readingarea , per_page)
+    page_num = request.GET.get('page')
+    area_page = area_paginator.get_page(page_num)
+
     context = { 
-        'readingarea' : readingarea ,
+        'readingarea' : area_page ,
         'form' : form ,
+        'pgcount' : area_paginator.num_pages,
+        'per_page' : per_page,
+        'searchform' : searchform,
     }
 
     return render(request,'readingarea/home.html', context )
