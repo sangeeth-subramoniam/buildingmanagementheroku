@@ -79,7 +79,7 @@ class MeterMaster(models.Model):
     MeterKBN = models.IntegerField()
     ReadingAreaNo = models.ForeignKey(ReadingArea, on_delete=models.CASCADE)
     UseType = models.IntegerField()
-    StoreNO = models.ForeignKey(StoreMaster,on_delete=models.CASCADE)
+    StoreNO = models.ForeignKey(StoreMaster,on_delete=models.CASCADE , related_name= 'storemaster')
     Magnification =  models.IntegerField()
     CommonType = models.IntegerField()
     ReadingStart =  models.IntegerField()

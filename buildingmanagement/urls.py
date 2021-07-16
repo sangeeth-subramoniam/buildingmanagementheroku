@@ -21,10 +21,10 @@ urlpatterns = [
     
     path('', include('homepage.urls') ),
     path('register/', include('registration.urls') ),
-    path('menu', include('menu.urls') ),
+    path('menu/', include('menu.urls') ),
     path('readingarea', include('readingarea.urls')),
-    path('codemaster', include('codemaster.urls')),
-    path('storemaster', include('storemaster.urls')),
-    path('setpositionmaster', include('setpositionmaster.urls')),
-    path('metermaster', include('metermaster.urls')),
+    path('codemaster/', include('codemaster.urls')),
+    path('storemaster/', include('storemaster.urls')),
+    path('setpositionmaster/', include('setpositionmaster.urls')),
+    path('metermaster/', include('metermaster.urls')),
 ]

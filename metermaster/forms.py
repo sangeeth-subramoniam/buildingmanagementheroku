@@ -1,6 +1,6 @@
 from django.db.models import fields
 from django.forms import ModelForm
-from structure.models import MeterMaster,ReadingArea, StoreMaster
+from structure.models import *
 
 class MeterMasterForm(ModelForm):
     class Meta:
@@ -18,4 +18,10 @@ class MeterMasterForm(ModelForm):
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
-            self.fields['StoreNo'].queryset = self.instance.ReadingAreaNo.StoreNO_set.order_by('StoreNM')
+            print('aaaaaa' , self.instance.ReadingAreaNo.id)
+            print('bbbbb' , StoreMaster.objects.filter(ReadingAreaNo__ReadingAreaNo = self.instance.ReadingAreaNo.ReadingAreaNo))
+            #self.fields['StoreNo'].queryset = self.instance.ReadingAreaNo.StoreNo_set
+            #self.fields['StoreNo'].queryset = StoreMaster.objects.filter(self.instance.ReadingAreaNo)
+            #self.fields['StoreNo'].queryset = StoreMaster.objects.filter(ReadingArea.objects.get(self.instance.ReadingAreaNo))
+            #self.fields['StoreNo'] = ['aaa' , 'bbb' , 'ccc']
+            self.fields['StoreNO'].queryset = StoreMaster.objects.filter(ReadingAreaNo__ReadingAreaNo = self.instance.ReadingAreaNo.ReadingAreaNo)
