@@ -10,3 +10,7 @@ td{
     width: 300px;
     height: 25px;
 }
+
+.menu-text:hover{
+    transform: scale(1.25);
+}
