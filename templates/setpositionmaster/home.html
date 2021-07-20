@@ -12,6 +12,15 @@ Homepage-SetPositionmaster
 {% block body %}
 <h1 style="text-align: center;"> SetPosition Master TABLE</h1>
 <br>
+<div class="jumbotron">
+    <form class="searchform" action="" method="GET">
+        {%csrf_token%}
+        <br>
+        {{searchform | crispy}}
+        <input type="submit" value="Search" name = "submit">
+    </form>
+</div>
+<br>
 <button onclick="create_element(2)">INSERT</button>
 <button onclick="create_element(1)">HIDE</button>
 <br>
@@ -28,6 +37,28 @@ Homepage-SetPositionmaster
     
 </div>
 <br>
+<div class="pagenumber">
+    <div class="row">
+        <div class="col-md-4"  style="text-align: right;">
+            {% if setposition.has_previous %}
+                <a href="{% url 'setpositionmaster:home' %}?page={{setposition.previous_page_number }}"> <b style="text-align: right;"><</b> </a>
+            {%endif%}
+        </div>
+
+        <div class="col-md-4">
+            <p style="text-align: center;">Showing Page : {{setposition.number}} / {{pgcount}} ({{per_page}} results)</p>
+        </div>
+
+        <div class="col-md-4"  style="text-align: left;">
+            {% if setposition.has_next %}
+                <a href="{% url 'setpositionmaster:home' %}?page={{setposition.next_page_number}}"> <b>></b> </a>
+            {%endif%}
+        </div>
+
+    </div>
+</div>
+<br>
+
     <table class="table" style="border: 2px solid black;">
         <th>ReadingAreaNo</th>
         <th>SetPositioncode</th>

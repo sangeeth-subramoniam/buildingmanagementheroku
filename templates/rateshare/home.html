@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+
+Homepage-Rate Share
+
+{% endblock %}
+
+{% block body %}
+
+<h1 style="text-align: center;">Rate Share TABLE</h1>
+<br>
+<button onclick="create_element(2)">INSERT</button>
+<button onclick="create_element(1)">HIDE</button>
+<br>
+<br>
+<div id = "form1" class="jumbotron insert-jumbo">
+    
+    <form method="post" id="personForm" data-cities-url="{% url 'rateshare:ajax_load_stores' %}" novalidate>
+        {%csrf_token%}       
+        <br>
+        {{form | crispy}}
+        
+        <input type="submit" value="submit" name = "submit">
+    </form>
+    
+</div>
+
+<br>
+    <table class="table" style="border: 2px solid black;">
+        <th>MeterID</th>
+        <th>StoreNO</th>
+        <th>ProcessingYYYY</th>
+        <th>ProcessingMM</th>
+        <th>Rate</th>
+        <th>Remarks</th>
+        <th>DeleteFlg</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        {%for rs in rate_share %}
+        <tr>
+            {% ifchanged %}
+            <td>
+                {{rs.MeterID}}
+            </td>
+            {% else %}
+            <td>
+                
+            </td>
+            {% endifchanged %}
+            <td>
+                {{rs.StoreNO}}
+            </td>
+            <td>
+                {{rs.ProcessingYYYY}}
+            </td>
+            <td>
+                {{rs.ProcessingMM}}
+            </td>
+            <td>
+                {{rs.Rate}}
+            </td>
+            <td>
+                {{rs.Remarks}}
+            </td>
+            <td>
+                {{rs.DeleteFlg}}
+            </td>
+            <td>
+                <a href="." class="btn btn-warning"> edit </a>
+            </td>
+            <td>
+                <a href="." class="btn btn-danger"> delete </a>
+            </td>
+            
+        </tr>
+        {%endfor%}
+    </table>
+
+<script>
+    window.onload = function() {
+        create_element(1);
+    };
+    
+    function create_element(a)
+    {
+        if(a==1)
+            document.getElementById("form1").style.display="none";
+        else
+            document.getElementById("form1").style.display="block";
+    }
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_ReadingAreaNo").change(function () {
+    var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+    var ReadingAreaNo = $(this).val();  // get the selected country ID from the HTML input
+    var MeterKBN = $("#id_MeterKBN").val()
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            data: {
+                'ReadingArea': ReadingAreaNo ,       // add the country id to the GET parameters
+                'MeterKBN' : MeterKBN
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                var test1 = data.split('*');
+                $("#id_StoreNO").html(test1[0]);  // replace the contents of the city input with the data that came from the server
+                $("#id_MeterID").html(test1[1]);
+            }
+        });
+    });
+
+    $("#id_MeterKBN").change(function () {
+    var MeterKBN = $(this).val();  
+    var ReadingAreaNo = $("#id_ReadingAreaNo").val()
+        $.ajax({                       
+            url: "{% url 'rateshare:ajax_load_meters' %}" ,
+            data: {
+                'MeterKBN': MeterKBN,       
+                'ReadingArea': ReadingAreaNo 
+            },
+            success: function (data) {   
+                console.log(data);
+                $("#id_MeterID").html(data);  
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

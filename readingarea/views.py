@@ -17,9 +17,12 @@ def home(request):
     
     delflg = request.GET.get('DeleteFlg') 
     readingarea = ReadingArea.objects.all().order_by('ReadingAreaNo','ReadingAreaNM')
-
+    print('del flag is ' , delflg)
     if(delflg != '' and delflg is not None):
-        readingarea = readingarea.filter(DeleteFlg = delflg)
+        readingarea = readingarea.filter(DeleteFlg = 0)
+    else:
+        readingarea = readingarea.filter(DeleteFlg__in = [0,1])
+
 
     per_page = 20
     area_paginator = Paginator(readingarea , per_page)

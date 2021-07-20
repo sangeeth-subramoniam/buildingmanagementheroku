@@ -1,0 +1,13 @@
+<div id="div1">
+    <option value="">---------</option>
+    {% for store in stores %}
+    <option value="{{ store.id }}">{{ store.StoreNM }}</option>
+    {% endfor %}
+</div>*
+<div id="div2">
+    <option value="">---------</option>
+    {% for meter in meters %}
+    <option value="{{ meter.id }}">{{ meter.MeterNo }}</option>
+    {% endfor %}
+</div>
+

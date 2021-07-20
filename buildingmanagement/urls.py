@@ -27,4 +27,5 @@ urlpatterns = [
     path('storemaster/', include('storemaster.urls')),
     path('setpositionmaster/', include('setpositionmaster.urls')),
     path('metermaster/', include('metermaster.urls')),
+    path('rateshare/', include('rateshare.urls')),
 ]

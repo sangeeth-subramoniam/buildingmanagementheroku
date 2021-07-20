@@ -1,22 +1,44 @@
 from django.shortcuts import render,redirect
 from structure.models import StoreMaster
-from .forms import StoreMasterForm
+from .forms import StoreMasterForm,StoreSearchForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
 
     form = StoreMasterForm()
+    searchform = StoreSearchForm()
     if(request.method == 'POST'):
         form = StoreMasterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/storemaster')
 
+    ReadingArea = request.GET.get('ReadingAreaNo')
+    DeleteFlg = request.GET.get('DeleteFlg') 
+
+    
     storemaster = StoreMaster.objects.all().order_by('StoreNO')
+
+    if(ReadingArea != '' and ReadingArea is not None):
+        storemaster = storemaster.filter(ReadingAreaNo = ReadingArea)
+
+    if(DeleteFlg != '' and DeleteFlg is not None):
+        storemaster = storemaster.filter(DeleteFlg = 0 )
+    else:
+        storemaster = storemaster.filter(DeleteFlg__in = [0,1] )
+
+    per_page = 5
+    Store_paginator = Paginator(storemaster , per_page)
+    page_num = request.GET.get('page')
+    store_page = Store_paginator.get_page(page_num)
 
     context = {
         'form' : form,
-        'storemaster' : storemaster
+        'storemaster' : store_page,
+        'pgcount' : Store_paginator.num_pages,
+        'per_page' : per_page,
+        'searchform' : searchform,
     }
     return render(request,'storemaster/home.html' , context)
 
