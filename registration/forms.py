@@ -10,6 +10,10 @@ class User_form(forms.ModelForm):
         model = User
         fields = ("username", "email" , "password")
 
+    def __init__(self, *args, **kwargs):
+        super(User_form, self).__init__(*args, **kwargs)
+
+
 
 class user_profile_form(forms.ModelForm):
     

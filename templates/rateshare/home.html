@@ -13,6 +13,15 @@ Homepage-Rate Share
 
 <h1 style="text-align: center;">Rate Share TABLE</h1>
 <br>
+<div class="jumbotron">
+    <form class="searchform" action="" method="GET">
+        {%csrf_token%}
+        <br>
+        {{searchform | crispy}}
+        <input type="submit" value="Search" name = "submit">
+    </form>
+</div>
+<br>
 <button onclick="create_element(2)">INSERT</button>
 <button onclick="create_element(1)">HIDE</button>
 <br>
@@ -28,8 +37,31 @@ Homepage-Rate Share
     </form>
     
 </div>
-
 <br>
+<br>
+<div class="pagenumber">
+    <div class="row">
+        <div class="col-md-4"  style="text-align: right;">
+            {% if rate_share_meter.has_previous %}
+                <a href="{% url 'rateshare:home' %}?page={{rate_share_meter.previous_page_number }}"> <b style="text-align: right;"><</b> </a>
+            {%endif%}
+        </div>
+
+        <div class="col-md-4">
+            <p style="text-align: center;">Showing Page : {{rate_share_meter.number}} / {{pgcount}} ({{per_page}} results)</p>
+        </div>
+
+        <div class="col-md-4"  style="text-align: left;">
+            {% if rate_share_meter.has_next %}
+                <a href="{% url 'rateshare:home' %}?page={{rate_share_meter.next_page_number}}"> <b>></b> </a>
+            {%endif%}
+        </div>
+
+    </div>
+</div>
+<br>
+
+
     <table class="table" style="border: 2px solid black;">
         <th>MeterID</th>
         <th>StoreNO</th>
@@ -40,7 +72,7 @@ Homepage-Rate Share
         <th>DeleteFlg</th>
         <th>Edit</th>
         <th>Delete</th>
-        {%for rs in rate_share %}
+        {%for rs in rate_share_meter %}
         <tr>
             {% ifchanged %}
             <td>
@@ -70,10 +102,10 @@ Homepage-Rate Share
                 {{rs.DeleteFlg}}
             </td>
             <td>
-                <a href="." class="btn btn-warning"> edit </a>
+                <a href="{% url 'rateshare:updateRateForm' rs.id %}" class="btn btn-warning"> edit </a>
             </td>
             <td>
-                <a href="." class="btn btn-danger"> delete </a>
+                <a href="{% url 'rateshare:deleteRateForm' rs.id %}" class="btn btn-danger"> delete </a>
             </td>
             
         </tr>
@@ -128,6 +160,43 @@ Homepage-Rate Share
             success: function (data) {   
                 console.log(data);
                 $("#id_MeterID").html(data);  
+            }
+        });
+    });
+
+</script>
+
+<script>
+    $("#id_ReadingAreaNo2").change(function () {
+    var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+    var ReadingAreaNo2 = $(this).val();  // get the selected country ID from the HTML input
+    var MeterKBN2 = $("#id_MeterKBN2").val()
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            data: {
+                'ReadingArea': ReadingAreaNo2 ,       // add the country id to the GET parameters
+                'MeterKBN' : MeterKBN2
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                var test1 = data.split('*');  // replace the contents of the city input with the data that came from the server
+                $("#id_MeterID2").html(test1[1]);
+            }
+        });
+    });
+
+    $("#id_MeterKBN2").change(function () {
+    var MeterKBN2 = $(this).val();  
+    var ReadingAreaNo2 = $("#id_ReadingAreaNo2").val()
+        $.ajax({                       
+            url: "{% url 'rateshare:ajax_load_meters' %}" ,
+            data: {
+                'MeterKBN': MeterKBN2,       
+                'ReadingArea': ReadingAreaNo2 
+            },
+            success: function (data) {   
+                console.log(data);
+                $("#id_MeterID2").html(data);  
             }
         });
     });
