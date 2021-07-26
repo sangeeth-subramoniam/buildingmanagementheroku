@@ -115,3 +115,21 @@ class RateShare(models.Model):
 
     def __str__(self):
         return str(self.MeterID)    
+
+
+class Price(models.Model):
+    ReadingAreaNo = models.ForeignKey(ReadingArea, on_delete=models.CASCADE)
+    ProcessingYYYY = models.CharField(max_length=4 , blank=False , default=str(YEAR))
+    ProcessingMM = models.CharField(max_length=2 , blank= False , default=str(MONTH))
+    ElectricPrice = models.IntegerField()
+    GasPrice = models.IntegerField()
+    WaterPrice = models.IntegerField()
+    InsUserID =  models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdDate = models.DateTimeField(auto_now=True,  blank = True)
+
+    class Meta:
+        unique_together = ['ReadingAreaNo' , 'ProcessingYYYY' , 'ProcessingMM']
+
+    def __str__(self):
+        return str(self.id)  

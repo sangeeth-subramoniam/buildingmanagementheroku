@@ -1,0 +1,15 @@
+{% extends 'Base.html' %}
+{% load static %}
+{%block body%}
+
+<form action="{% url 'setprice:deleteSetPriceForm' sp.id %}" method="POST">
+    {%csrf_token%}
+    <p>Are you sure you want to delete {{ sp.id }} ??</p>
+    <br>
+    <button><a href=" {% url 'setprice:home'%} "> CANCEL </a></button>
+    <input type="submit" value="YES">
+
+</form>
+
+
+{% endblock %}

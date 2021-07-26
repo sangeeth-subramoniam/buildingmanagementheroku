@@ -28,4 +28,5 @@ urlpatterns = [
     path('setpositionmaster/', include('setpositionmaster.urls')),
     path('metermaster/', include('metermaster.urls')),
     path('rateshare/', include('rateshare.urls')),
+    path('setprice/', include('setprice.urls')),
 ]

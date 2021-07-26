@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'setpositionmaster',
     'metermaster',
     'rateshare',
+    'setprice',
     
 ]
 
