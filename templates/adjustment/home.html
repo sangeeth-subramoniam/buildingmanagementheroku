@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+
+Homepage-Adjustment
+
+{% endblock %}
+
+{% block body %}
+
+
+
+<h1 style="text-align: center;"> PRICE ADJUSTMENT</h1>
+<br>
+<div class="jumbotron">
+    <form class="searchform" action="" method="GET">
+        {%csrf_token%}
+        <br>
+        {{searchform | crispy}}
+        <input type="submit" value="Search" name = "submit">
+    </form>
+</div>
+<br>
+<button onclick="create_element(2)">INSERT</button>
+<button onclick="create_element(1)">HIDE</button>
+<br>
+<br>
+<div id = "form1" class="jumbotron insert-jumbo">
+    
+    <form id = "form2" action="" method="POST">
+        {%csrf_token%}       
+        <br>
+        {{form | crispy}}
+        
+        <input type="submit" value="submit" name = "submit">
+    </form>
+    
+</div>
+<br>
+
+<div class="pagenumber">
+    <div class="row">
+        <div class="col-md-4"  style="text-align: right;">
+            {% if setprice.has_previous %}
+                <a href="{% url 'adjustment:home' %}?page={{setprice.previous_page_number }}"> <b style="text-align: right;"><</b> </a>
+            {%endif%}
+        </div>
+
+        <div class="col-md-4">
+            <p style="text-align: center;">Showing Page : {{setprice.number}} / {{pgcount}} ({{per_page}} results)</p>
+        </div>
+
+        <div class="col-md-4"  style="text-align: left;">
+            {% if setprice.has_next %}
+                <a href="{% url 'adjustment:home' %}?page={{setprice.next_page_number}}"> <b>></b> </a>
+            {%endif%}
+        </div>
+
+    </div>
+</div>
+
+
+    <table class="table" style="border: 2px solid black;">
+        <th>ReadingArea</th>
+        <th>ElectricPrice</th>
+        <th>WaterPrice</th>
+        <th>GasPrice</th>
+        <th>ElectricAdjustment</th>
+        <th>GasAdjustment</th>
+        <th>WaterAdjustment</th>      
+        <th>Edit</th>
+        <th>Delete</th>
+        {%for sp in setprice %}
+        <tr>
+            <td>
+                {{sp.ReadingAreaNo}}
+            </td>
+            <td>
+                {{sp.ElectricPrice}}
+            </td>
+            <td>
+                {{sp.GasPrice}}
+            </td>
+            <td>
+                {{sp.WaterPrice}}
+            </td>
+            <td>
+                {{sp.ElectricAdjustment}}
+            </td>
+            <td>
+                {{sp.GasAdjustment}}
+            </td>
+            <td>
+                {{sp.WaterAdjustment}}
+            </td>
+            <td>
+                <a href="{% url 'adjustment:updateadjustmentForm' sp.id %}" class="btn btn-warning"> edit </a>
+            </td>
+            <td>
+                <a href="{% url 'adjustment:deleteadjustmentForm' sp.id %} " class="btn btn-danger"> delete </a>
+            </td>
+            
+        </tr>
+        {%endfor%}
+    </table>
+
+<script>
+    window.onload = function() {
+        create_element(1);
+    };
+    
+    function create_element(a)
+    {
+        if(a==1)
+            document.getElementById("form1").style.display="none";
+        else
+            document.getElementById("form1").style.display="block";
+    }
+</script>
+
+
+
+
+{% endblock %}
+

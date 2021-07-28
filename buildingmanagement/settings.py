@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'metermaster',
     'rateshare',
     'setprice',
+    'adjustment',
     
 ]
 
