@@ -131,6 +131,10 @@ class Price(models.Model):
     UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
     UpdDate = models.DateTimeField(auto_now=True,  blank = True)
 
+    def save(self, *args, **kwargs):
+        
+        super(Price, self).save(*args, **kwargs) # Call the "real" save() method.
+
     class Meta:
         unique_together = ['ReadingAreaNo' , 'ProcessingYYYY' , 'ProcessingMM']
 

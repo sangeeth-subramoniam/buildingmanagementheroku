@@ -5,12 +5,14 @@ from django import forms
 
 class SetPriceForm(ModelForm):
     ReadingAreaNo = forms.ModelChoiceField(queryset=ReadingArea.objects.order_by('ReadingAreaNo'))
+    Total = forms.IntegerField()
     class Meta:
         model = Price
-        fields = ['ReadingAreaNo','ProcessingYYYY','ProcessingMM','ElectricPrice','GasPrice','WaterPrice','ElectricAdjustment','GasAdjustment','WaterAdjustment']
+        fields = ['ReadingAreaNo','ProcessingYYYY','ProcessingMM','ElectricPrice','GasPrice','WaterPrice','ElectricAdjustment','GasAdjustment','WaterAdjustment' , 'Total']
     
     def __init__(self, *args, **kwargs):
         super(SetPriceForm, self).__init__(*args, **kwargs)
+
         if self.instance:
             self.fields['ReadingAreaNo'].disabled = True # still displays the field in the template
             self.fields['ProcessingYYYY'].disabled = True
@@ -18,6 +20,7 @@ class SetPriceForm(ModelForm):
             self.fields['ElectricPrice'].disabled = True
             self.fields['GasPrice'].disabled = True
             self.fields['WaterPrice'].disabled = True
+            
             # del self.fields['job'] # removes field from form and template
         #if self.instance and self.instance.level < 1:
             #self.fields['avatar'].disabled = True
