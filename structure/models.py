@@ -8,15 +8,18 @@ YEAR = timezone.now().year
 MONTH = timezone.now().month
 
 class CodeMaster(models.Model):
-    CodeType = models.CharField(max_length=4)
-    CodeTypeNM = models.CharField(max_length=10)
+    CodeKBN = models.CharField(max_length=4)
+    CodeKBNNM = models.CharField(max_length=10)
     Code = models.CharField(max_length= 4)
     CodeNM = models.CharField(max_length= 20)
-    Remarks = models.CharField(max_length=30 , blank = True)
+    Biko = models.CharField(max_length=30 , blank = True)
     DeleteFlg = models.CharField(max_length=1 , blank = True)
+    InsApId = models.CharField(max_length = 20 , null=True , default=None , blank = True)
     InsUserID = models.CharField(max_length = 20 , null=True , default=None , blank = True)
+    InsDate = models.DateTimeField(auto_now_add=True)
+    UpdApId = models.CharField(max_length = 20 , null=True , default=None , blank = True)
     UpdUserID = models.CharField(max_length=20 , null=True , default=None , blank = True)
-    UpdDate = models.DateTimeField(auto_now_add=True)
+    UpdDate = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ['CodeType','Code']
