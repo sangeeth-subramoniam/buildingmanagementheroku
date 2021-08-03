@@ -30,5 +30,6 @@ urlpatterns = [
     path('rateshare/', include('rateshare.urls')),
     path('setprice/', include('setprice.urls')),
     path('adjustment/', include('adjustment.urls')),
+    path('receipt/', include('receipt.urls')),
 
 ]

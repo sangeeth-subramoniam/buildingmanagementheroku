@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rateshare',
     'setprice',
     'adjustment',
+    'receipt',
     
 ]
 

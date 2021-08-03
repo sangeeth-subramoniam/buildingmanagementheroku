@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+
+Homepage-Receipt
+
+{% endblock %}
+
+{% block body %}
+<h1>Receipt</h1>
+<br>
+<div class="container">
+    <div class="jumbotron">
+        <form action="" method = "POST">
+            {%csrf_token%}
+            <label for="year"> YEAR </label>
+            <input type="text" name="year" id="year">
+
+            <label for="month"> MONTH </label>
+            <input type="text" name="month" id="month">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>
+<br><br>
+    {%for i in values%}
+        <h3>Meter</h3> <br>
+        <b>id :</b> {{i.MeterID}} <br>
+        <b>Area :</b> {{i.ReadingAreaNo}} <br>
+        <b>Year :</b> {{i.ReadingYYYY}} <br>
+        <b>Month :</b> {{i.ProcessingMM}} <br>
+        <b>Meter Type :</b> {{i.MeterKBN}} <br>
+        <b>Price Per Unit :</b> {{i.price_per_unit}} <br>
+        <b>Share :</b> {{i.rate_share}} <br>
+        <b>Total Cost :</b> {{i.total_estimate}} <br>
+
+        <hr class="dashed">
+    {%endfor%}
+<br><br>
+
+{% endblock %}
+

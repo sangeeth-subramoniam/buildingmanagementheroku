@@ -8,18 +8,15 @@ YEAR = timezone.now().year
 MONTH = timezone.now().month
 
 class CodeMaster(models.Model):
-    CodeKBN = models.CharField(max_length=4)
-    CodeKBNNM = models.CharField(max_length=10)
+    CodeType = models.CharField(max_length=4)
+    CodeTypeNM = models.CharField(max_length=10)
     Code = models.CharField(max_length= 4)
     CodeNM = models.CharField(max_length= 20)
-    Biko = models.CharField(max_length=30 , blank = True)
+    Remarks = models.CharField(max_length=30 , blank = True)
     DeleteFlg = models.CharField(max_length=1 , blank = True)
-    InsApId = models.CharField(max_length = 20 , null=True , default=None , blank = True)
     InsUserID = models.CharField(max_length = 20 , null=True , default=None , blank = True)
-    InsDate = models.DateTimeField(auto_now_add=True)
-    UpdApId = models.CharField(max_length = 20 , null=True , default=None , blank = True)
     UpdUserID = models.CharField(max_length=20 , null=True , default=None , blank = True)
-    UpdDate = models.DateTimeField(auto_now=True)
+    UpdDate = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ['CodeType','Code']
@@ -142,4 +139,23 @@ class Price(models.Model):
         unique_together = ['ReadingAreaNo' , 'ProcessingYYYY' , 'ProcessingMM']
 
     def __str__(self):
-        return str(self.id)  
+        return str(self.id)
+
+class MeterReading(models.Model):
+
+    MeterID = models.ForeignKey(MeterMaster, on_delete=models.CASCADE)
+    ReadingYYYY = models.CharField(max_length=4 , blank=True , default=str(YEAR))
+    ProcessingMM = models.CharField(max_length=2 , blank= False , default=str(MONTH))
+    Reading = models.IntegerField()
+    Using = models.IntegerField()
+    InsUserID =  models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdUserID = models.CharField(max_length=20, null=True , default=None ,  blank = True)
+    UpdDate = models.DateTimeField(auto_now=True,  blank = True)
+
+    class Meta:
+        unique_together = ['MeterID' , 'ReadingYYYY' , 'ProcessingMM']
+
+    def __str__(self):
+        return str(self.id)
+
+

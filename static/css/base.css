@@ -14,3 +14,8 @@ td{
 .menu-text:hover{
     transform: scale(1.25);
 }
+
+
+hr.dashed {
+    border-top: 3px dashed #bbb;
+}
