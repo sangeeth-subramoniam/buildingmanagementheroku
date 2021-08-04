@@ -26,9 +26,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-m&&u9vsre-*eg^drsd(nqem4em($!$g(9o-t75je1i$h(^b(w6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['sangeeth-buildingmanagement.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['*','sangeeth-buildingmanagement.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,13 +97,18 @@ WSGI_APPLICATION = 'buildingmanagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'building_mgmt',
-        'USER' : 'postgres',
-        'PASSWORD' : 'admin',
-        'HOST' : 'localhost',
+        'NAME': 'd6oe53i34vfls7',
+        'USER' : 'fbclscltvxotam',
+        'PASSWORD' : 'b638768bb1ebe5415692254964ea445eeb2359bf3460c8ed4f7d900b89681a41',
+        'HOST' : 'ec2-34-193-101-0.compute-1.amazonaws.com',
         'PORT' : '5432',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 
 # Password validation
@@ -140,6 +146,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
