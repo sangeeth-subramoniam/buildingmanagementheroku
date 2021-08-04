@@ -26,7 +26,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-m&&u9vsre-*eg^drsd(nqem4em($!$g(9o-t75je1i$h(^b(w6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['sangeeth-buildingmanagement.herokuapp.com','127.0.0.1']
 
@@ -104,6 +104,11 @@ DATABASES = {
         'PORT' : '5432',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 
 # Password validation
