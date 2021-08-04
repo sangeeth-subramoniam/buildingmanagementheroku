@@ -26,6 +26,8 @@ Homepage-Receipt
     </div>
 </div>
 <br><br>
+        
+    {% if values|length > 0 %}
     {%for i in values%}
         <h3>Meter</h3> <br>
         <b>id :</b> {{i.MeterID}} <br>
@@ -39,6 +41,9 @@ Homepage-Receipt
 
         <hr class="dashed">
     {%endfor%}
+    {%else%}
+    <p>Meters Not Available</p>  
+    {%endif%}
 <br><br>
 
 {% endblock %}
