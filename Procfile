@@ -1,1 +1,1 @@
-web: gunicorn buildingmanagement.wsgi --log-file
+web: gunicorn buildingmanagement.wsgi --log-file -
