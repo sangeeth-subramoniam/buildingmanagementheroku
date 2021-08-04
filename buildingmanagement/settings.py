@@ -97,10 +97,10 @@ WSGI_APPLICATION = 'buildingmanagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd6oe53i34vfls7',
-        'USER' : 'fbclscltvxotam',
-        'PASSWORD' : 'b638768bb1ebe5415692254964ea445eeb2359bf3460c8ed4f7d900b89681a41',
-        'HOST' : 'ec2-34-193-101-0.compute-1.amazonaws.com',
+        'NAME': 'building_mgmt',
+        'USER' : 'postgres',
+        'PASSWORD' : 'admin',
+        'HOST' : 'localhost',
         'PORT' : '5432',
     }
 }
