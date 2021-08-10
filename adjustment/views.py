@@ -37,7 +37,7 @@ def home(request):
     page_num = request.GET.get('page')
     Price_page = price_paginator.get_page(page_num)
 
-    print('tret' , setprice[0].total)
+    #print('tret' , setprice[0].total)
 
 
 

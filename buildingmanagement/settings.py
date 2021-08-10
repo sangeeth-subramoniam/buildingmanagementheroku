@@ -55,8 +55,7 @@ INSTALLED_APPS = [
     'rateshare',
     'setprice',
     'adjustment',
-    'receipt',
-    
+    'receipt',    
 ]
 
 MIDDLEWARE = [
